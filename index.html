@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GRACEEEEEE</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      height: 100%;
+      background: #080808;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .scene {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lines {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      opacity: 0.05;
+    }
+
+    .lines span {
+      display: block;
+      height: 1px;
+      background: #fff;
+      margin-bottom: 38px;
+      transform: scaleX(0);
+      transform-origin: left;
+      animation: lineIn 3s ease forwards;
+    }
+
+    @keyframes lineIn { to { transform: scaleX(1); } }
+
+    .vignette {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 20%, #080808 85%);
+      pointer-events: none;
+    }
+
+    .grain {
+      position: absolute;
+      inset: 0;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 180px 180px;
+      pointer-events: none;
+    }
+
+    .content {
+      position: relative;
+      text-align: center;
+    }
+
+    .timestamp {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(11px, 1.5vw, 14px);
+      font-weight: 300;
+      letter-spacing: 0.4em;
+      color: #3a3a3a;
+      text-transform: uppercase;
+      margin-bottom: 3rem;
+      animation: fadeUp 2s ease 0.5s both;
+    }
+
+    .name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(42px, 9vw, 110px);
+      font-weight: 600;
+      color: #ede8df;
+      line-height: 1;
+      letter-spacing: 0.18em;
+      white-space: nowrap;
+      animation: fadeUp 2s ease 1s both, flicker 6s ease 4s infinite;
+    }
+
+    @keyframes flicker {
+      0%, 95%, 100% { opacity: 1; }
+      96% { opacity: 0.4; }
+      97% { opacity: 1; }
+      98% { opacity: 0.2; }
+      99% { opacity: 1; }
+    }
+
+    .divider {
+      height: 1px;
+      background: #2a2a2a;
+      margin: 2rem auto;
+      width: 0;
+      animation: lineGrow 1.4s ease 2s forwards;
+    }
+
+    @keyframes lineGrow { to { width: 80%; } }
+
+    .subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(15px, 2.5vw, 24px);
+      font-weight: 300;
+      font-style: italic;
+      color: #4a4a4a;
+      letter-spacing: 0.05em;
+      line-height: 1.7;
+      animation: fadeUp 2s ease 2.5s both;
+    }
+
+    .sad {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(24px, 4vw, 42px);
+      font-weight: 300;
+      color: #333;
+      margin-top: 2.5rem;
+      animation: fadeUp 2s ease 3.2s both;
+    }
+
+    .extra {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(12px, 1.8vw, 18px);
+      font-weight: 300;
+      font-style: italic;
+      color: #3a3a3a;
+      letter-spacing: 0.08em;
+      margin-top: 1.5rem;
+      animation: fadeUp 2s ease 3.8s both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .corner {
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      border-color: #1e1e1e;
+      border-style: solid;
+      border-width: 0;
+    }
+
+    .corner.tl { top: 2rem; left: 2rem; border-top-width: 1px; border-left-width: 1px; }
+    .corner.tr { top: 2rem; right: 2rem; border-top-width: 1px; border-right-width: 1px; }
+    .corner.bl { bottom: 2rem; left: 2rem; border-bottom-width: 1px; border-left-width: 1px; }
+    .corner.br { bottom: 2rem; right: 2rem; border-bottom-width: 1px; border-right-width: 1px; }
+  </style>
+</head>
+<body>
+  <div class="scene">
+    <div class="lines" id="lines"></div>
+    <div class="grain"></div>
+    <div class="vignette"></div>
+
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
+
+    <div class="content">
+      <div class="timestamp">somewhere — too late</div>
+      <div class="name">G R A C E E E E E</div>
+      <div class="divider"></div>
+      <div class="subtitle">what's going on, where are you —</div>
+      <div class="sad">:(</div>
+      <div class="extra">we were supposed to go over your homework together, remember :)<br>      hope everything's alright — good night, sweet dreams</div>
+    </div>
+  </div>
+
+  <script>
+    const container = document.getElementById('lines');
+    const count = Math.ceil(window.innerHeight / 39);
+    for (let i = 0; i < count; i++) {
+      const s = document.createElement('span');
+      s.style.animationDelay = (i * 0.025) + 's';
+      container.appendChild(s);
+    }
+  </script>
+</body>
+</html>
